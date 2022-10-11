@@ -1,0 +1,63 @@
+{% extends 'administrator/base.html' %}
+{% block main %}
+<div class="block-header">
+  
+    <div class="row">
+       <div class="col-lg-7 col-md-6 col-sm-12">
+         
+          <h2>Dashboard</h2>
+          <ul class="breadcrumb">
+             <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Aero</a></li>
+             <li class="breadcrumb-item active">Dashboard 1</li>
+          </ul>
+          <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+       </div>
+       <div class="col-lg-5 col-md-6 col-sm-12">
+          <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
+       </div>
+    </div>
+ </div>
+    <div class="container-fluid">
+   <div class="row clearfix">
+      <div class="col-lg-3 col-md-6 col-sm-12">
+         <div class="card widget_2 big_icon">
+            <div class="body">
+               <h6>Vendors</h6>
+               <h2>{{total_vendors}}</h2>
+               
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+         <div class="card widget_2 big_icon users">
+            <div class="body">
+               <h6>Customers</h6>
+               <h2>{{total_customers}}</h2>
+               
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+         <div class="card widget_2 big_icon products">
+            <div class="body">
+               <h6>Products</h6>
+               <h2>{{total_products}}</h2>
+               
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+         <div class="card widget_2 big_icon sales">
+            <div class="body">
+               <h6>Orders</h6>
+               <h2>{{total_orders}}</h2>
+               
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+   </div>
+</div>
+
+{% endblock %}

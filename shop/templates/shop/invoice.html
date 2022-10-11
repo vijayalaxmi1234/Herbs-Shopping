@@ -1,0 +1,102 @@
+{% extends 'base.html' %} {% block content %}
+
+
+<!-- page -->
+<div class="services-breadcrumb">
+  <div class="agile_inner_breadcrumb">
+    <div class="container">
+      <ul class="w3_short">
+        <li>
+          <a href="/"></a>
+          <i></i>
+        </li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- //page -->
+
+<!-- top Products -->
+<div class="ads-grid py-sm-5 py-4">
+  <div class="container py-xl-4 py-lg-2">
+    <!-- tittle heading -->
+    <h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
+     Invoice
+    </h3>
+    <!-- //tittle heading -->
+    <div class="row">
+      <!-- product left -->
+      <div class="agileinfo-ads-display col-lg-12">
+        <div class="wrapper">
+          <!-- first section -->
+          <div class="product-sec1 px-sm-4 px-3 py-sm-5 py-3 mb-4">
+            <div class="row">
+                <table class="table table-stripped table-bordered">
+                  <tr>
+                    <th colspan="2">Customer Name</th>
+                    <td colspan="2">{{user.full_name}}</td>
+                    <th>Mobile</th>
+                    <td>{{user.phone_number}}</td>
+                    <th>Email</th>
+                    <td>{{user.email}}</td>
+                  </tr>
+                  <tr>
+                    <th colspan="2">Shipping Address</th>
+                    <td colspan="6">{{product_order.shipping_address}}</td>
+                  </tr>
+                    <tr>
+                        <th>Order Date</th>
+                        <td>{{ product_order.order_date}}</td>
+                        <th>Order Status</th>
+                        <td>{{ product_order.order_status}}</td>
+                        <th>Payment Status</th>
+                        <td>{{ product_order.status}}</td>
+                        <th>Total Order Amount</th>
+                        <td>₹{{ product_order.total_order_amount}}/-</td>
+                    </tr>
+            </table>
+                <table class="table table-stripped table-bordered">
+                    <tr>
+                        <th>#</th>
+                        <th style="text-align:center">Vendor</th>
+                        <th style="text-align:center">Product</th>
+                        <th style="text-align:center">Quantity</th>
+                        <th style="text-align:center">Price</th>
+                        <th style="text-align:center">Amount</th>
+                  
+                    </tr>
+
+              {% for order_item in order_items %}
+              <tr>
+                  <td>{{ forloop.counter}}</td>
+                   <td >{{ order_item.product.vendor.full_name}}</td>
+                  <td>{{ order_item.product.name}}
+                      <br><img src="{{ order_item.product.image.url}}" width="100"/>
+                  </td>
+                  <td style="text-align:center"> {{ order_item.quantity}}</td>
+                  <td style="text-align:right">₹{{ order_item.product.price}}/-</td>
+                  <td style="text-align:right">₹{{ order_item.amount}}/-</td>
+                  
+              </tr>
+              
+              {% endfor %}
+              <tr>
+                <td colspan="5" style="text-align:right;">Total Amount</td>
+                <td  style="text-align:right">₹{{product_order.total_order_amount}}/-</td>
+
+                
+              </tr>
+            </table>
+            <a class="btn btn-primary" style="float:right;" onclick="window.print()"><i class="fa fa-print"></i> Print</a>
+            </div>
+            <!-- //first section -->
+          </div>
+        </div>
+        <!-- //product left -->
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</div>

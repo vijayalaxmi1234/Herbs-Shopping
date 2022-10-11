@@ -1,0 +1,99 @@
+{% extends 'base.html' %} {% block content %}
+
+
+<!-- page -->
+<div class="services-breadcrumb">
+  <div class="agile_inner_breadcrumb">
+    <div class="container">
+      <ul class="w3_short">
+        <li>
+          <a href="/">Home</a>
+          <i>|</i>
+        </li>
+        <li>Cart List</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- //page -->
+
+<!-- top Products -->
+<div class="ads-grid py-sm-5 py-4">
+  <div class="container py-xl-4 py-lg-2">
+    <!-- tittle heading -->
+    <h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
+     Cart List
+    </h3>
+    <!-- //tittle heading -->
+    <div class="row">
+      <!-- product left -->
+      <div class="agileinfo-ads-display col-lg-12">
+        <div class="wrapper">
+          <!-- first section -->
+          <div class="product-sec1 px-sm-4 px-3 py-sm-5 py-3 mb-4">
+            <div class="row">
+              {% if cart_items %}
+                <table class="table table-stripped table-bordered">
+                    <tr>
+                        <th>#</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                    </tr>
+
+              {% for cart_item in cart_items %}
+              <tr>
+                  <td>{{ forloop.counter}}</td>
+                  <td>{{ cart_item.product.name}}
+                      <br><img src="{{ cart_item.product.image.url}}" width="100"/>
+                  </td>
+                  <td> <form action="{% url 'shop:update_cart' cart_item.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="number" name="quantity" min="1" value="{{ cart_item.quantity}}" style="width:40px;" max="{{ cart_item.product.current_stock }}" />
+                    <button type="submit" class="btn btn-primary">Update</button>
+                  </form></td>
+                  <td>₹{{ cart_item.product.price}}/-</td>
+                  <td>₹{{ cart_item.amount}}/-</td>
+                  <td>
+                      <a class="btn btn-danger" href="{% url 'shop:del_cart' cart_item.id %}" onclick="return confirm('Are you sure you want to delete this?')"><i class="fa fa-trash"></i>Delete</a>
+                  </td>
+              </tr>
+              <tr>
+                <td colspan="4" style="text-align:right;">Total Amount</td>
+                <td>₹{{tot_amount}}/-</td>
+                <td></td>
+              </tr>
+              {% endfor %}
+            </table>
+            {% if tot_amount > 0 %}
+                <div class="col-md-12">
+                    
+                    <form action="{% url 'shop:buy_now' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                          <label>Shipping Address:</label>
+                          <input type="text" name="shipping_address" required class="form-control" />
+                      </div>
+                       
+                    <button class="btn btn-success" type="submit">Buy Now</button>
+
+                    </form>
+                </div>
+                
+                    {% endif %}
+            {% else %}
+            <p> No Items in Cart </p>
+            {% endif %}
+            </div>
+            <!-- //first section -->
+          </div>
+        </div>
+        <!-- //product left -->
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</div>

@@ -1,0 +1,98 @@
+{% extends 'base.html' %} {% block content %}
+<!-- banner-2 -->
+<div class="page-head_agile_info_w3l">
+
+</div>
+<!-- //banner-2 -->
+
+<!-- page -->
+<div class="services-breadcrumb">
+  <div class="agile_inner_breadcrumb">
+    <div class="container">
+      <ul class="w3_short">
+        <li>
+          <a href="index.html">Home</a>
+          <i>|</i>
+        </li>
+        <li>Herbal Products</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- //page -->
+
+<!-- top Products -->
+<div class="ads-grid py-sm-5 py-4">
+  <div class="container py-xl-4 py-lg-2">
+    <!-- tittle heading -->
+    <h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
+      {{ category.name }}
+    </h3>
+    <!-- //tittle heading -->
+    <div class="row">
+      <!-- product left -->
+      <div class="agileinfo-ads-display col-lg-9">
+        <div class="wrapper">
+          <!-- first section -->
+          <div class="product-sec1 px-sm-4 px-3 py-sm-5 py-3 mb-4">
+            <div class="row">
+              {% for product in products %}
+              <div class="col-md-4 product-men">
+                <div class="men-pro-item simpleCart_shelfItem">
+                  <div class="men-thumb-item text-center">
+                    <img src="/media/{{ product.image }}" alt="" width="200" />
+                    <div class="men-cart-pro">
+                      <div class="inner-men-cart-pro">
+                        <a href="{% url 'shop:detail' product.id %}" class="link-product-add-cart"
+                          >Quick View</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-info-product text-center border-top mt-4">
+                    <h4 class="pt-1">
+                      <a href="#">{{ product.name }}</a>
+                      <p><b>Supplier: {{ product.vendor.full_name }}</b></p>
+                      <p><b>Description:{{product.description}}</b></p>
+                    </h4>
+                    <div class="info-product-price my-2">
+                      <span class="item_price">₹{{ product.price }}/-</span>
+                    </div>
+                    <div
+                      class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out"
+                    >
+                    {% if user.is_authenticated %}
+                      {% if product.current_stock > 0 %}
+                      <form action="{% url 'shop:add_to_cart' product.id %}" method="post">
+                        {% csrf_token %}
+                        <fieldset>
+                          <input
+                            type="submit"
+                            name="submit"
+                            value="Add to cart"
+                            class="button btn"
+                          />
+                        </fieldset>
+                      </form>
+                      {% else %}
+                      <a data-toggle="modal" data-target="#exampleModal" class="btn btn-danger">Out Of Stock</a>
+                      {% endif %}
+                      {% else %}
+                        <a data-toggle="modal" data-target="#exampleModal" class="btn btn-primary">Add to Cart</a>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <!-- //first section -->
+          </div>
+        </div>
+        <!-- //product left -->
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</div>

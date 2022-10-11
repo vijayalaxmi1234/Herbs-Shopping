@@ -1,0 +1,68 @@
+{% extends 'base.html' %} {% block content %}
+
+
+<!-- page -->
+<div class="services-breadcrumb">
+  <div class="agile_inner_breadcrumb">
+    <div class="container">
+      <ul class="w3_short">
+        <li>
+          <a href="/">Home</a>
+          <i>|</i>
+        </li>
+        <li>Service Booking</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- //page -->
+
+<!-- top Products -->
+<div class="ads-grid py-sm-5 py-4">
+  <div class="container py-xl-4 py-lg-2">
+    <!-- tittle heading -->
+    <h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
+     Serving Booking
+    </h3>
+    <!-- //tittle heading -->
+    <div class="row">
+      <!-- product left -->
+      <div class="agileinfo-ads-display col-lg-12">
+        <div class="wrapper">
+          <!-- first section -->
+          <div class="product-sec1 px-sm-4 px-3 py-sm-5 py-3 mb-4">
+            <div class="row">
+              
+                <div class="col-md-12">
+                    <h4> Service Selected: {{ sel_category.name}}</h4>
+                    <form action="#" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                          <label>Address:</label>
+                          <input type="text" name="address" required class="form-control" />
+                      </div>
+                        <div class="form-group">
+                            <label>Problem Description:</label>
+                            <input type="text" name="problem_description" required class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Booking Date:</label>
+                            <input type="date" name="booking_date" min="{% now "Y-m-d" %}"  required class="form-control"/>
+                        </div>
+                        
+                    <button class="btn btn-success" type="submit">Buy Now</button>
+
+                    </form>
+                </div>
+                
+            </div>
+            <!-- //first section -->
+          </div>
+        </div>
+        <!-- //product left -->
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</div>

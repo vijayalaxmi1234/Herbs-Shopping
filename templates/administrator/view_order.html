@@ -1,0 +1,76 @@
+{% extends 'administrator/base.html' %}
+{% block main %}
+<div class="body_scroll">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Products List</h2>
+                
+                
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <a class="btn btn-primary float-right" type="button" href="{% url 'account:product-create' %}">Add New</a>
+            </div>
+        </div>
+    </div>
+<div class="container-fluid">
+<div class="row clearfix">
+<div class="col-lg-12">
+<div class="card">
+    <div class="body">
+        <div class="table-responsive">
+           
+            <table class="table table-bordered table-striped table-hover js-basic-example">
+                    <tr>
+                        <th>Order Date</th>
+                        <td>{{ product_order.order_date}}</td>
+                        <th>Order Status</th>
+                        <td>{{ product_order.order_status}}</td>
+                        <th>Delivery Status</th>
+                        <td>{{ product_order.delivery_status}}</td>
+                        <th>Total Order Amount</th>
+                        <td>₹{{ product_order.total_order_amount}}/-</td>
+                    </tr>
+            </table>
+            <table class="table table-bordered table-striped table-hover js-basic-example">
+                    <tr>
+                        <th>#</th>
+                         <th style="text-align:center">Vendor</th>
+                        <th style="text-align:center">Product</th>
+                        <th style="text-align:center">Quantity</th>
+                        <th style="text-align:center">Price</th>
+                        <th style="text-align:center">Amount</th>
+                  
+                    </tr>
+
+              {% for order_item in order_items %}
+              <tr>
+                  <td>{{ forloop.counter}}</td>
+                   <td >{{ order_item.product.vendor.full_name}}</td>
+                  <td>{{ order_item.product.name}}
+                      <br><img src="{{ order_item.product.image.url}}" width="100"/>
+                  </td>
+                  <td style="text-align:center"> {{ order_item.quantity}}</td>
+                  <td style="text-align:right">₹{{ order_item.product.price}}/-</td>
+                  <td style="text-align:right">₹{{ order_item.amount}}/-</td>
+                  
+              </tr>
+              
+              {% endfor %}
+              <tr>
+                <td colspan="4" style="text-align:right;">Total Amount</td>
+                <td  style="text-align:right">₹{{product_order.total_order_amount}}/-</td>
+                
+              </tr>
+            </table>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+{% include "administrator/dtscripts.html" %}
+{% endblock %}

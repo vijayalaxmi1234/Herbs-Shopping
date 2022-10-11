@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container">
+	<br>
+	<div class="card">
+		<div class="row">
+			<div class="col-md-4">
+				<img src= "/media/{{ product.image }}" width="100" alt="image" class="img-fluid">
+				
+				<h3>{{ product.name }}</h3>
+			</div>
+			<div class="col-md-8">
+				<p>Product category: {{ product.category.name }}</p>
+				<p>Product supplier: {{ product.vendor.full_name }}</p>
+				<p>Product Price: {{ product.price }}</p>
+				<p>Product rating:{{ average }}/10</p>
+				<p>Product description: {{ product.description }}</p>
+				
+			</div>
+		</div>
+	</div>
+
+<br>
+<div class="card">
+	<div class="card=-body">
+		<h3 class="text-center">Reviews</h3>
+		{% if user.is_authenticated %}
+		<form action="{% url 'shop:add_review' product.id %}" method="POST">
+			{% csrf_token %}
+			<label for="comment">Review</label>
+			<textarea name="comment" id="comment" cols="30" rows="5" class="form-control"></textarea>
+			<label for="rating">Rating</label>
+			<input type="range" id="rangeInput" name="rating" min="0" max="10" value="0" step="0.5" oninput="amount.value=rangeInput.value">
+			<output name="amount" id="amount" for="rangeInput">0</output>
+			<br>
+			<input type="submit" class="btn btn-danger" value="Add Review">
+		</form>
+		{% endif %}
+	</div></div>
+	<br>
+	<div class="card" style="background-color: black;">
+		<div class="card-body" style="background:white;">
+			<h3 class="text-center">Reviews</h3>
+			{% for review in reviews %}
+			<div class="row">
+				<div class="col-md-3">
+					<h5 class="test-left">{{ review.user.username }}</h5>
+					<h5>{{ review.rating }}</h5>
+					{% if request.user == review.user %}
+					<a href="{% url 'shop:edit_review' product.id review.id %}">Edit</a>
+					<a href="{% url 'shop:delete_review' product.id review.id %}" onclick="return confirm('Are you sure want to delete this?');">Delete</a>
+					{% endif %}
+				</div>
+				<div class="col-md-9">
+					<p>{{ review.comment }}</p>
+				</div>
+			</div>
+	<br>
+	{% endfor %}</div></div>
+</div>
+</div>
+{% endblock %}

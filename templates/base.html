@@ -1,0 +1,686 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+  <head>
+    <title>Herbal and Agro Farming</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+
+    <script>
+      addEventListener(
+        "load",
+        function () {
+          setTimeout(hideURLbar, 0);
+        },
+        false
+      );
+
+      function hideURLbar() {
+        window.scrollTo(0, 1);
+      }
+    </script>
+    <!-- //Meta tag Keywords -->
+
+    <!-- Custom-Files -->
+    <link
+      href="{% static 'css/bootstrap.css' %}"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+    <!-- Bootstrap css -->
+    <link
+      href="{% static 'css/style.css' %}"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.css' %}" />
+    <!-- Font-Awesome-Icons-CSS -->
+    <link
+      href="{% static 'css/popuo-box.css' %}"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+    <!-- pop-up-box -->
+    <link
+      href="{% static 'css/menu.css' %}"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+    <!-- menu style -->
+    <!-- //Custom-Files -->
+
+    <!-- web fonts -->
+    <link
+      href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&amp;subset=latin-ext"
+      rel="stylesheet"
+    />
+    <link
+      href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese"
+      rel="stylesheet"
+    />
+    <!-- //web fonts -->
+  </head>
+
+  <body>
+    <!-- top-header -->
+    <div class="agile-main-top">
+      <div class="container-fluid">
+        <div class="row main-top-w3l py-2">
+          <div class="col-lg-4 header-most-top"></div>
+          <div class="col-lg-8 header-right mt-lg-0 mt-2">
+            <!-- header lists -->
+            <ul>
+              {% if user.is_authenticated %}
+              <li class="text-center border-right text-white"></li>
+
+              <li
+                class="text-center border-right text-white"
+                style="width: 25%"
+              >
+                Logged in as: {{user}}
+              </li>
+              <li class="text-center text-white border-right" style="width: 10%">
+                <a href="{% url 'shop:my_profile' %}" class="text-white">
+                  <i class="fas fa-user mr-2"></i>Profile
+                </a>
+              </li>
+              <li class="text-center text-white border-right" style="width: 20%">
+                <a href="{% url 'account:customer_change_password' %}" class="text-white">
+                  <i class="fas fa-lock mr-2"></i>Change Password
+                </a>
+              </li>
+              <li class="text-center text-white" style="width: 10%">
+                <a href="{% url 'account:logout' %}" class="text-white">
+                  <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                </a>
+              </li>
+
+              {% else %}
+              <li class="text-center border-right text-white"></li>
+              <li class="text-center border-right text-white"></li>
+              <li class="text-center border-right text-white">
+                <a
+                  href="#"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                  class="text-white"
+                >
+                  <i class="fas fa-sign-in-alt mr-2"></i> Log In
+                </a>
+              </li>
+              <li class="text-center text-white border-right">
+                <a
+                  href="#"
+                  data-toggle="modal"
+                  data-target="#exampleModal2"
+                  class="text-white"
+                >
+                  <i class="fas fa-sign-out-alt mr-2"></i>Register
+                </a>
+              </li>
+
+<li class="text-center text-white">
+                <a
+                  href="#"
+                  data-toggle="modal"
+                  data-target="#exampleModal23"
+                  class="text-white"
+                >
+                  <i class="fas fa-sign-out-alt mr-2"></i>Vendor Register
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+            <!-- //header lists -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- modals -->
+    <!-- log in -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center">Log In</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="{% url 'account:login' %}" method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                <label class="col-form-label"><i class="fas fa-envelope">Email</i></label>
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder=" "
+                  name="email"
+                  required=""
+                />   
+              </div>
+              <div class="form-group">
+                <label class="col-form-label"><i class="fas fa-lock">Password</i></label>
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder=" "
+                  name="password"
+                  required=""
+                />
+              </div>
+              <div class="right-w3l">
+                <input type="submit" class="form-control" value="Log in" />
+              </div>
+
+<div class="sub-w3l"></div>
+<p class="text-center dont-do mt-3">
+  <a href="{% url 'password_reset' %}" >FORGOT PASSWORD</a>
+</p>
+
+
+
+              <div class="sub-w3l"></div>
+              <p class="text-center dont-do mt-3">
+                Don't have an account?
+                <a href="#" data-toggle="modal" data-target="#exampleModal2">
+                  Register Now</a
+                >
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- register -->
+    <div
+      class="modal fade"
+      id="exampleModal2"
+      tabindex="-1"
+      role="dialog"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">REGISTRATION FORM</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="{% url 'account:register' %}" method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                <label class="col-form-label"><i class="fas fa-user">Your Name</i></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder=" "
+                  name="full_name"
+                  pattern="[a-zA-Z][a-zA-z]+[a-zA-Z]*" title="Only Aplphabets Allowed"
+                  required=""
+                />
+              </div>
+              <div class="form-group">
+                <label class="col-form-label"><i class="fas fa-envelope">Email</i></label>
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder=" "
+                  name="email"
+                  required=""
+                />
+              </div>
+              <div class="form-group">
+                <label class="col-form-label"><i class="fas fa-mobile">Mobile</i></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder=" "
+                  name="phone_number"
+                  pattern="[5-9][0-9]{9}" title="Only Numbers Allowed"
+                  required=""
+                />
+              </div>
+              <div class="form-group">
+                <label class="col-form-label"><i class="fas fa-key">Password</i></label>
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder=" "
+                  name="password"
+                  id="password1"
+                  pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}" title="A password must be eight characters including one uppercase letter,one special character and alphanumeric characters"
+                  required=""
+                />
+              </div>
+              <div class="form-group">
+                <label class="col-form-label"><i class="fas fa-key">Confirm Password</i></label>
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder=" "
+                  name="Confirm Password"
+                  id="password2"
+                   pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}" title="A password must be eight characters including one uppercase letter,one special character and alphanumeric characters"
+                  required=""
+                />
+              </div>
+              <div class="right-w3l">
+                <input type="submit" class="form-control" value="Register" />
+              </div>
+              <div class="sub-w3l"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- //modal -->
+    <!-- register -->
+    <div
+      class="modal fade"
+      id="exampleModal23"
+      tabindex="-1"
+      role="dialog"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Vendor Register</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="{% url 'account:vendor_register' %}" method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                <label class="col-form-label"><i class="fas fa-user">Vendor Name</i></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder=" "
+                  name="full_name"
+                  pattern="[a-zA-Z][a-zA-z]+[a-zA-Z]*" title="Only Aplphabets Allowed"
+                  required=""
+                />
+              </div>
+              <div class="form-group">
+                <label class="col-form-label"><i class="fas fa-envelope">Email</i></label>
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder=" "
+                  name="email"
+                  required=""
+                />
+              </div>
+              <div class="form-group">
+                <label class="col-form-label"><i class="fas fa-mobile">Mobile</i></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder=" "
+                  name="phone_number"
+                  pattern="[5-9][0-9]{9}" title="Only Numbers Allowed"
+                  required=""
+                />
+              </div>
+              <div class="form-group">
+                <label class="col-form-label"><i class="fas fa-key">Password</i></label>
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder=" "
+                  name="password"
+                  id="password1"
+                  pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}" title="A password must be eight characters including one uppercase letter,one special character and alphanumeric characters"
+                  required=""
+                />
+              </div>
+              <div class="form-group">
+                <label class="col-form-label"><i class="fas fa-key">Confirm Password</i></label>
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder=" "
+                  name="Confirm Password"
+                  id="password2"
+                  pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}" title="A password must be eight characters including one uppercase letter,one special character and alphanumeric characters"
+                  required=""
+                />
+              </div>
+              <div class="right-w3l">
+                <input type="submit" class="form-control" value="Register" />
+              </div>
+              <div class="sub-w3l"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- //modal -->
+
+    <!-- //top-header -->
+
+    <!-- header-bottom-->
+    <div class="header-bot">
+      <div class="container">
+        <div class="row header-bot_inner_wthreeinfo_header_mid">
+          <!-- logo -->
+          <div class="col-md-6 logo_agile">
+            <h1 class="text-center">
+              <a href="{% url 'shop:home' %}" class="font-weight-bold font-italic">
+                <img
+                  src="{% static 'images/logo1.jpg' %}"
+                  alt=" "
+                  class="img-fluid"
+                  style="left: -21%"
+                />HERBAL & AGRO FARMING
+              </a>
+            </h1>
+          </div>
+          <!-- //logo -->
+          <!-- header-bot -->
+          <div class="col-md-6 header mt-4 mb-md-0 mb-4">
+            <div class="row">
+              <!-- search -->
+              <div class="col-10 agileits_search"></div>
+              <!-- //search -->
+              <!-- cart details -->
+
+              <!-- //cart details -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- shop locator (popup) -->
+    <!-- //header-bottom -->
+    <!-- navigation -->
+    <div class="navbar-inner">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="agileits-navi_search"></div>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto text-center mr-xl-5">
+              <li class="nav-item active mr-lg-2 mb-lg-0 mb-2">
+                <a class="nav-link" href="{% url 'shop:home' %}"
+                  >Home
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Disease List
+                </a>
+                <div class="dropdown-menu">
+                  {% for category in categories %}
+                  <a
+                    class="dropdown-item"
+                    href="{% url 'shop:products' category.slug  %}"
+                    >{{category.name}}</a
+                  >
+                  {% endfor %}
+                </div>
+              </li>
+
+              
+              {% if user.is_authenticated %}
+              <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+                <a class="nav-link" href="{% url 'shop:my_orders' %}"
+                  >My Orders</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'shop:cart-list' %}"
+                  ><i class="fas fa-cart-arrow-down"></i></a
+                >
+              </li>
+              {% else %}
+              <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+                <a class="nav-link" href="{% url 'account:about' %}"
+                  >About Us</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'account:contact' %}"
+                  >Contact Us</a
+                >
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <!-- //navigation -->
+{% for message in messages %}
+<script type="text/javascript">
+  alert("{{message}}");
+</script>
+{% endfor %}
+    {% block content %} {% endblock %}
+
+    <!-- footer -->
+    <footer>
+      <div class="footer-top-first">
+        <div class="container py-md-5 py-sm-4 py-3">
+          <!-- footer first section -->
+
+          <!-- //footer first section -->
+          <!-- footer second section -->
+          <div
+            class="row w3l-grids-footer border-top border-bottom py-sm-4 py-3"
+          >
+            <div class="col-md-4 offer-footer">
+              <div class="row">
+                <div class="col-4 icon-fot">
+                  <i class="fas fa-dolly"></i>
+                </div>
+                <div class="col-8 text-form-footer">
+                  <h3>Free Shipping</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 offer-footer my-md-0 my-4">
+              <div class="row">
+                <div class="col-4 icon-fot">
+                  <i class="fas fa-shipping-fast"></i>
+                </div>
+                <div class="col-8 text-form-footer">
+                  <h3>Fast Delivery</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 offer-footer">
+              <div class="row">
+                <div class="col-4 icon-fot">
+                  <i class="far fa-thumbs-up"></i>
+                </div>
+                <div class="col-8 text-form-footer">
+                  <h3>Big Choice</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- //footer second section -->
+        </div>
+      </div>
+
+      <!-- //footer fourth section (text) -->
+    </footer>
+    <!-- //footer -->
+    <!-- copyright -->
+    <div class="copy-right py-3">
+      <div class="container">
+        <p class="text-center text-white">
+          © 2022 Herbal and Agro Farming. All rights reserved
+        </p>
+      </div>
+    </div>
+    <!-- //copyright -->
+
+    <!-- js-files -->
+    <!-- jquery -->
+    <script src="{% static 'js/jquery-2.2.3.min.js' %}"></script>
+    <!-- //jquery -->
+
+    <!-- nav smooth scroll -->
+    <script>
+      $(document).ready(function () {
+        $(".dropdown").hover(
+          function () {
+            $(".dropdown-menu", this).stop(true, true).slideDown("fast");
+            $(this).toggleClass("open");
+          },
+          function () {
+            $(".dropdown-menu", this).stop(true, true).slideUp("fast");
+            $(this).toggleClass("open");
+          }
+        );
+      });
+    </script>
+    <!-- //nav smooth scroll -->
+
+    <!-- popup modal (for location)-->
+    <script src="{% static 'js/jquery.magnific-popup.js' %}"></script>
+    <script>
+      $(document).ready(function () {
+        $(".popup-with-zoom-anim").magnificPopup({
+          type: "inline",
+          fixedContentPos: false,
+          fixedBgPos: true,
+          overflowY: "auto",
+          closeBtnInside: true,
+          preloader: false,
+          midClick: true,
+          removalDelay: 300,
+          mainClass: "my-mfp-zoom-in",
+        });
+      });
+    </script>
+    <!-- //popup modal (for location)-->
+
+    <!-- password-script -->
+    <script>
+      window.onload = function () {
+        document.getElementById("password1").onchange = validatePassword;
+        document.getElementById("password2").onchange = validatePassword;
+      };
+
+      function validatePassword() {
+        var pass2 = document.getElementById("password2").value;
+        var pass1 = document.getElementById("password1").value;
+        if (pass1 != pass2)
+          document
+            .getElementById("password2")
+            .setCustomValidity("Passwords Don't Match");
+        else document.getElementById("password2").setCustomValidity("");
+        //empty string means no validation error
+      }
+    </script>
+    <!-- //password-script -->
+
+    <!-- scroll seller -->
+    <script src="{% static 'js/scroll.js' %}"></script>
+    <!-- //scroll seller -->
+
+    <!-- smoothscroll -->
+    <script src="{% static 'js/SmoothScroll.min.js' %}"></script>
+    <!-- //smoothscroll -->
+
+    <!-- start-smooth-scrolling -->
+    <script src="{% static 'js/move-top.js' %}"></script>
+    <script src="{% static 'js/easing.js' %}"></script>
+    <script>
+      jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+          event.preventDefault();
+
+          $("html,body").animate(
+            {
+              scrollTop: $(this.hash).offset().top,
+            },
+            1000
+          );
+        });
+      });
+    </script>
+    <!-- //end-smooth-scrolling -->
+
+    <!-- smooth-scrolling-of-move-up -->
+    <script>
+      $(document).ready(function () {
+        /*
+      var defaults = {
+        containerID: 'toTop', // fading element id
+        containerHoverID: 'toTopHover', // fading element hover id
+        scrollSpeed: 1200,
+        easingType: 'linear' 
+      };
+      */
+        $().UItoTop({
+          easingType: "easeOutQuart",
+        });
+      });
+    </script>
+    <!-- //smooth-scrolling-of-move-up -->
+
+    <!-- for bootstrap working -->
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <!-- //for bootstrap working -->
+    <!-- //js-files -->
+  </body>
+</html>

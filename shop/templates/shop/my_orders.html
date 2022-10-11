@@ -1,0 +1,71 @@
+{% extends 'base.html' %} {% block content %}
+
+
+<!-- page -->
+<div class="services-breadcrumb">
+  <div class="agile_inner_breadcrumb">
+    <div class="container">
+      <ul class="w3_short">
+        <li>
+          <a href="/">Home</a>
+          <i>|</i>
+        </li>
+        <li>My Orders</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- //page -->
+
+<!-- top Products -->
+<div class="ads-grid py-sm-5 py-4">
+  <div class="container py-xl-4 py-lg-2">
+    <!-- tittle heading -->
+    <h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
+     My Orders
+    </h3>
+    <!-- //tittle heading -->
+    <div class="row">
+      <!-- product left -->
+      <div class="agileinfo-ads-display col-lg-12">
+        <div class="wrapper">
+          <!-- first section -->
+          <div class="product-sec1 px-sm-4 px-3 py-sm-5 py-3 mb-4">
+            <div class="row">
+              {% if product_orders %}
+                <table class="table table-stripped table-bordered">
+                    <tr>
+                        <th>#</th>
+                        <th>Order Date</th>
+                        <th>Order Status</th>
+                        <th>Payment Status</th>
+                        <th>Total Order Amount</th>
+                        <th>Action</th>
+                    </tr>
+
+              {% for product_order in product_orders %}
+              <tr>
+                  <td>{{ forloop.counter}}</td>
+                  <td>{{ product_order.order_date}}</td>
+                  <td>{{ product_order.order_status}}</td>
+                  <td>{{ product_order.status}}</td>
+                  <td>₹{{ product_order.total_order_amount}}/-</td>
+                  <td><a class="btn btn-primary" href="{% url 'shop:view_order' product_order.id %}">View Order</a>{% if product_order.status == 'Success' %} <a class="btn btn-primary" href="{% url 'shop:invoice' product_order.id %}">Invoice</a>{% endif %}</td>
+
+              </tr>
+              {% endfor %}
+            </table>
+            {% else %}
+            <p> No Items in My Orders </p>
+            {% endif %}
+            </div>
+            <!-- //first section -->
+          </div>
+        </div>
+        <!-- //product left -->
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</div>

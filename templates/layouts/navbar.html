@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="container-fluid">
+            <div style="
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: xx-large;
+    font-family: emoji;
+    text-shadow: 2px 2px 5px lightcoral;
+">Home Appliances Sales &amp; Service</div>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="{% url 'shop:home' %}">Home</a>
+                {% if request.user.is_authenticated %}
+                    <a class="nav-item nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+                {% else %}
+                    <a class="nav-item nav-link" href="{% url 'accounts:login' %}">Login</a>
+                    <a class="nav-item nav-link" href="{% url 'accounts:register' %}">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>

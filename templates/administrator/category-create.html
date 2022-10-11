@@ -1,0 +1,44 @@
+{% extends 'administrator/base.html' %}
+{% block main %}
+<div class="body_scroll">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>New Category</h2>
+                
+                
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                
+            </div>
+        </div>
+    </div>
+<div class="container-fluid">
+<div class="row clearfix">
+<div class="col-lg-12 col-md-12 col-sm-12">
+<div class="card">
+    <div class="body">
+                <form action="#" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in category_form %}
+                    
+                        <div class="form-group lang_form">
+                            <label class="input-label" for="exampleFormControlInput1">{{field.label}}</label>
+                                                <input type="{{field.input_type}}" name="{{field.name}}" class="form-control" id="id_{{field.name}}"
+                                                       placeholder="{{field.name}}" required>
+                        </div>
+                    
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary">Save</button>
+
+                </form>
+             </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}
